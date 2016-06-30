@@ -1,0 +1,226 @@
+##################################################
+======================= new (20150428) =======================
+##################################################
+
+ 1  8 * * 1,2,3,4,5  /home/smartwise/marketdata/ebroker/bin/stop_ebroker_connections.sh
+ 1  9 * * 1,2,3,4,5  /home/smartwise/marketdata/ebroker/bin/cron_start_ebroker_connections.sh
+
+ 2  9 * * 1,2,3,4,5  /home/smartwise/orcOTI_fileMDI/bin/cron_start_capi_protocol_server.sh /home/smartwise/orcOTI_fileMDI/conf/orc_oti_file_mdi_smartwise.ini >> /home/smartwise/orc_file_cronjob.log
+ 1  9 * * 1,2,3,4,5  /home/smartwise/backtestOTI_fileMDI/bin/cron_start_capi_protocol_server.sh /home/smartwise/backtestOTI_fileMDI/conf/backtest_oti_file_mdi_smartwise.ini >> /home/smartwise/backtest_file_cronjob.log
+
+#4  9 * * 1,2,3,4,5  /home/smartwise/usefulscripts/subscribeAllInstruments.sh
+#5  9 * * 1,2,3,4,5  /home/smartwise/usefulscripts/subscribeAllInstruments.sh
+#6  9 * * 1,2,3,4,5  /home/smartwise/usefulscripts/subscribeAllInstruments.sh
+#7  9 * * 1,2,3,4,5  /home/smartwise/usefulscripts/subscribeAllInstruments.sh
+
+ 4  9 * * 1,2,3,4,5  /home/smartwise/backtestOTI_fileMDI/bin/subscribe_all_instruments.sh /home/smartwise/backtestOTI_fileMDI/bin/instrumentlist.txt 11010
+ 6  9 * * 1,2,3,4,5  /home/smartwise/backtestOTI_fileMDI/bin/subscribe_all_instruments.sh /home/smartwise/backtestOTI_fileMDI/bin/instrumentlist.txt 11010
+ 5  9 * * 1,2,3,4,5  /home/smartwise/orcOTI_fileMDI/bin/subscribe_all_instruments.sh /home/smartwise/orcOTI_fileMDI/bin/instrumentlist_orc.txt 12010
+ 7  9 * * 1,2,3,4,5  /home/smartwise/orcOTI_fileMDI/bin/subscribe_all_instruments.sh /home/smartwise/orcOTI_fileMDI/bin/instrumentlist_orc.txt 12010
+
+59 23 * * 1,2,3,4,5  /home/smartwise/orcOTI_fileMDI/bin/cron_end_capi_protocol.sh orc_oti_file_mdi_smartwise.ini >> /home/smartwise/orc_file_cronjob.log
+59 23 * * 1,2,3,4,5  /home/smartwise/backtestOTI_fileMDI/bin/cron_end_capi_protocol_server.sh backtest_oti_file_mdi_smartwise.ini >> /home/smartwise/backtest_file_cronjob.log
+
+
+ 5 16 * * 1,2,3,4,5  /home/smartwise/usefulscripts/checkLastPrice.sh
+
+
+10  9 * * 1,2,3,4,5  /home/smartwise/usefulscripts/monitor_ebroker.sh
+15 16 * * 1,2,3,4,5  ps aux | grep monitor_ebroker | grep -v grep | awk '{print $2}' | xargs kill
+
+
+#############################
+# Ad hoc
+#############################
+
+
+
+
+#############################
+# Disk space
+#############################
+ 1  2 * * * gzip /home/smartwise/marketdata/ebroker/data/parsed/smartwise_hk_stock/*
+31  2 * * * gzip /home/smartwise/marketdata/ebroker/data/raw/smartwise_hk_stock/*
+ 1  2 * * * gzip /home/smartwise/marketdata/ebroker/data/parsed/smartwise_hk_stock_noleading0/*
+31  2 * * * gzip /home/smartwise/marketdata/ebroker/data/raw/smartwise_hk_stock_noleading0/*
+ 1  3 * * * find /home/smartwise/backtestOTI_fileMDI/data/log/ -type f -exec gzip {} \;
+30  3 * * * find /home/smartwise/orcOTI_fileMDI/data/log/ -type f -exec gzip {} \;
+
+ 1  4 * * * /home/smartwise/usefulscripts/check_disk_space.sh 90 sunny.yan@cashalgo.com,jason.lin@cashalgo.com
+
+
+
+
+
+##################################################
+======================= new (20150408) =======================
+##################################################
+ 1  8 * * 1,2,3,4,5  /home/smartwise/marketdata/ebroker/bin/stop_ebroker_connections.sh
+ 1  9 * * 1,2,3,4,5  /home/smartwise/marketdata/ebroker/bin/cron_start_ebroker_connections.sh
+
+ 2  9 * * 1,2,3,4,5  /home/smartwise/orcOTI_fileMDI/bin/cron_start_capi_protocol_server.sh /home/smartwise/orcOTI_fileMDI/conf/orc_oti_file_mdi_smartwise.ini >> /home/smartwise/orc_file_cronjob.log
+ 1  9 * * 1,2,3,4,5  /home/smartwise/backtestOTI_fileMDI/bin/cron_start_capi_protocol_server.sh /home/smartwise/backtestOTI_fileMDI/conf/backtest_oti_file_mdi_smartwise.ini >> /home/smartwise/backtest_file_cronjob.log
+
+ 4  9 * * 1,2,3,4,5  /home/smartwise/usefulscripts/subscribeAllInstruments.sh
+ 5  9 * * 1,2,3,4,5  /home/smartwise/usefulscripts/subscribeAllInstruments.sh
+ 6  9 * * 1,2,3,4,5  /home/smartwise/usefulscripts/subscribeAllInstruments.sh
+ 7  9 * * 1,2,3,4,5  /home/smartwise/usefulscripts/subscribeAllInstruments.sh
+
+59 23 * * 1,2,3,4,5  /home/smartwise/orcOTI_fileMDI/bin/cron_end_capi_protocol.sh orc_oti_file_mdi_smartwise.ini >> /home/smartwise/orc_file_cronjob.log
+59 23 * * 1,2,3,4,5  /home/smartwise/backtestOTI_fileMDI/bin/cron_end_capi_protocol_server.sh backtest_oti_file_mdi_smartwise.ini >> /home/smartwise/backtest_file_cronjob.log
+
+
+ 5 16 * * 1,2,3,4,5  /home/smartwise/usefulscripts/checkLastPrice.sh
+
+
+10  9 * * 1,2,3,4,5  /home/smartwise/usefulscripts/monitor_ebroker.sh
+15 16 * * 1,2,3,4,5  ps aux | grep monitor_ebroker | grep -v grep | awk '{print $2}' | xargs kill
+
+
+#############################
+# Ad hoc
+#############################
+
+
+
+
+#############################
+# Disk space
+#############################
+ 1  2 * * * gzip /home/smartwise/marketdata/ebroker/data/parsed/smartwise_hk_stock/*
+31  2 * * * gzip /home/smartwise/marketdata/ebroker/data/raw/smartwise_hk_stock/*
+ 1  2 * * * gzip /home/smartwise/marketdata/ebroker/data/parsed/smartwise_hk_stock_noleading0/*
+31  2 * * * gzip /home/smartwise/marketdata/ebroker/data/raw/smartwise_hk_stock_noleading0/*
+ 1  3 * * * find /home/smartwise/backtestOTI_fileMDI/data/log/ -type f -exec gzip {} \;
+30  3 * * * find /home/smartwise/orcOTI_fileMDI/data/log/ -type f -exec gzip {} \;
+
+ 1  4 * * * /home/smartwise/usefulscripts/check_disk_space.sh 75 sunny.yan@cashalgo.com,jason.lin@cashalgo.com
+
+
+
+
+
+##################################################
+======================= old =======================
+##################################################
+ 1  8 * * 1,2,3,4,5  /home/smartwise/marketdata/ebroker/bin/stop_ebroker_connections.sh
+ 1  9 * * 1,2,3,4,5  /home/smartwise/marketdata/ebroker/bin/cron_start_ebroker_connections.sh
+
+#3  9 * * 1,2,3,4,5  /home/smartwise/backtestOTI_fileMDI/bin/cron_start_oti_mdi_engine.sh /home/smartwise/backtestOTI_fileMDI/conf/backtest_file.ini >> /home/smartwise/backtest_file_cronjob.log
+ 2  9 * * 1,2,3,4,5  /home/smartwise/orcOTI_fileMDI/bin/cron_start_capi_protocol_server.sh /home/smartwise/orcOTI_fileMDI/conf/orc_oti_file_mdi.ini >> /home/smartwise/orc_file_cronjob.log
+ 1  9 * * 1,2,3,4,5  /home/smartwise/backtestOTI_fileMDI_20150318/bin/cron_start_capi_protocol_server.sh /home/smartwise/backtestOTI_fileMDI_20150318/conf/backtest_oti_file_mdi_smartwise.ini >> /home/smartwise/backtest_file_cronjob.log
+
+43  4 * * *          /home/nan/capi_protocol_server/bin/cron_start_capi_protocol_server.sh /home/nan/capi_protocol_server/conf/bktt_oti_bktt_mdi_xiaonan.ini >> /home/nan/capi_cronjob.log
+
+ 4  9 * * 1,2,3,4,5  /home/smartwise/usefulscripts/subscribeAllInstruments.sh
+ 5  9 * * 1,2,3,4,5  /home/smartwise/usefulscripts/subscribeAllInstruments.sh
+ 6  9 * * 1,2,3,4,5  /home/smartwise/usefulscripts/subscribeAllInstruments.sh
+ 7  9 * * 1,2,3,4,5  /home/smartwise/usefulscripts/subscribeAllInstruments.sh
+
+59 23 * * 1,2,3,4,5  /home/smartwise/backtestOTI_fileMDI/bin/cron_end_oti_mdi_engine.sh backtest_file.ini >> /home/smartwise/backtest_file_cronjob.log
+59 23 * * 1,2,3,4,5  /home/smartwise/orcOTI_fileMDI/bin/cron_end_capi_protocol_server.sh orc_oti_file_mdi.ini >> /home/smartwise/orc_file_cronjob.log
+59 23 * * 1,2,3,4,5  /home/smartwise/backtestOTI_fileMDI_20150318/bin/cron_end_capi_protocol_server.sh backtest_oti_file_mdi_smartwise.ini >> /home/smartwise/backtest_file_cronjob.log
+
+40  4 * * *          /home/nan/capi_protocol_server/bin/cron_end_capi_protocol_server.sh bktt_oti_bktt_mdi_xiaonan.ini >> /home/nan/capi_cronjob.log
+
+ 5 16 * * 1,2,3,4,5  /home/smartwise/usefulscripts/checkLastPrice.sh
+
+10  9 * * 1,2,3,4,5  /home/smartwise/usefulscripts/monitor_ebroker.sh
+15 16 * * 1,2,3,4,5  ps aux | grep monitor_ebroker | grep -v grep | awk '{print $2}' | xargs kill
+
+
+
+
+
+
+
+
+
+
+
+
+
+##################################################
+======================= new (20150521) =======================
+##################################################
+
+ 1  8 * * 1,2,3,4,5  /home/smartwise/marketdata/ebroker/bin/stop_ebroker_connections.sh
+ 1  9 * * 1,2,3,4,5  /home/smartwise/marketdata/ebroker/bin/cron_start_ebroker_connections.sh
+
+57  8 * * 1,2,3,4,5  /home/smartwise/orcOTI_fileMDI/bin/cron_start_capi_protocol_server.sh /home/smartwise/orcOTI_fileMDI/conf/orc_oti_file_mdi_smartwise.ini >> /home/smartwise/orc_file_cronjob.log
+55  8 * * 1,2,3,4,5  /home/smartwise/backtestOTI_fileMDI/bin/cron_start_capi_protocol_server.sh /home/smartwise/backtestOTI_fileMDI/conf/backtest_oti_file_mdi_smartwise.ini >> /home/smartwise/backtest_file_cronjob.log
+
+#4  9 * * 1,2,3,4,5  /home/smartwise/usefulscripts/subscribeAllInstruments.sh
+#5  9 * * 1,2,3,4,5  /home/smartwise/usefulscripts/subscribeAllInstruments.sh
+#6  9 * * 1,2,3,4,5  /home/smartwise/usefulscripts/subscribeAllInstruments.sh
+#7  9 * * 1,2,3,4,5  /home/smartwise/usefulscripts/subscribeAllInstruments.sh
+
+ 1  9 * * 1,2,3,4,5  /home/smartwise/backtestOTI_fileMDI/bin/subscribe_all_instruments.sh /home/smartwise/backtestOTI_fileMDI/bin/instrumentlist.txt 11010
+ 2  9 * * 1,2,3,4,5  /home/smartwise/backtestOTI_fileMDI/bin/subscribe_all_instruments.sh /home/smartwise/backtestOTI_fileMDI/bin/instrumentlist.txt 11010
+ 1  9 * * 1,2,3,4,5  /home/smartwise/orcOTI_fileMDI/bin/subscribe_all_instruments.sh /home/smartwise/orcOTI_fileMDI/bin/instrumentlist_orc.txt 12010
+ 2  9 * * 1,2,3,4,5  /home/smartwise/orcOTI_fileMDI/bin/subscribe_all_instruments.sh /home/smartwise/orcOTI_fileMDI/bin/instrumentlist_orc.txt 12010
+
+59 23 * * 1,2,3,4,5  /home/smartwise/orcOTI_fileMDI/bin/cron_end_capi_protocol.sh orc_oti_file_mdi_smartwise.ini >> /home/smartwise/orc_file_cronjob.log
+59 23 * * 1,2,3,4,5  /home/smartwise/backtestOTI_fileMDI/bin/cron_end_capi_protocol_server.sh backtest_oti_file_mdi_smartwise.ini >> /home/smartwise/backtest_file_cronjob.log
+
+
+ 5 16 * * 1,2,3,4,5  /home/smartwise/usefulscripts/checkLastPrice.sh
+
+
+10  9 * * 1,2,3,4,5  /home/smartwise/usefulscripts/monitor_ebroker.sh
+15 16 * * 1,2,3,4,5  ps aux | grep monitor_ebroker | grep -v grep | awk '{print $2}' | xargs kill
+
+ *  * * * *          /bin/ping -c 5 legendarb.dynamic-dns.net >> /home/smartwise/ping_legend.log
+
+
+
+
+
+##################################################
+======================= new (20150623) =======================
+##################################################
+
+ 1  8 * * 1,2,3,4,5  /home/smartwise/marketdata/ebroker/bin/stop_ebroker_connections.sh
+50  8 * * 1,2,3,4,5  /home/smartwise/marketdata/ebroker/bin/cron_start_ebroker_connections.sh
+
+57  8 * * 1,2,3,4,5  /home/smartwise/orcOTI_fileMDI/bin/cron_start_capi_protocol_server.sh /home/smartwise/orcOTI_fileMDI/conf/orc_oti_file_mdi_smartwise.ini >> /home/smartwise/orc_file_cronjob.log
+55  8 * * 1,2,3,4,5  /home/smartwise/backtestOTI_fileMDI/bin/cron_start_capi_protocol_server.sh /home/smartwise/backtestOTI_fileMDI/conf/backtest_oti_file_mdi_smartwise.ini >> /home/smartwise/backtest_file_cronjob.log
+
+#4  9 * * 1,2,3,4,5  /home/smartwise/usefulscripts/subscribeAllInstruments.sh
+#5  9 * * 1,2,3,4,5  /home/smartwise/usefulscripts/subscribeAllInstruments.sh
+#6  9 * * 1,2,3,4,5  /home/smartwise/usefulscripts/subscribeAllInstruments.sh
+#7  9 * * 1,2,3,4,5  /home/smartwise/usefulscripts/subscribeAllInstruments.sh
+
+ 1  9 * * 1,2,3,4,5  /home/smartwise/backtestOTI_fileMDI/bin/subscribe_all_instruments.sh /home/smartwise/backtestOTI_fileMDI/bin/instrumentlist.txt 11010
+ 2  9 * * 1,2,3,4,5  /home/smartwise/backtestOTI_fileMDI/bin/subscribe_all_instruments.sh /home/smartwise/backtestOTI_fileMDI/bin/instrumentlist.txt 11010
+ 1  9 * * 1,2,3,4,5  /home/smartwise/orcOTI_fileMDI/bin/subscribe_all_instruments.sh /home/smartwise/orcOTI_fileMDI/bin/instrumentlist_orc.txt 12010
+ 2  9 * * 1,2,3,4,5  /home/smartwise/orcOTI_fileMDI/bin/subscribe_all_instruments.sh /home/smartwise/orcOTI_fileMDI/bin/instrumentlist_orc.txt 12010
+
+15  9 * * 1,2,3,4,5  /home/smartwise/usefulscripts/monitor_log_for_error_smartwise.py >> /home/smartwise/orcOTI_fileMDI/data/log/monitor_log_for_error_smartwise.log
+
+59 23 * * 1,2,3,4,5  /home/smartwise/orcOTI_fileMDI/bin/cron_end_capi_protocol.sh orc_oti_file_mdi_smartwise.ini >> /home/smartwise/orc_file_cronjob.log
+59 23 * * 1,2,3,4,5  /home/smartwise/backtestOTI_fileMDI/bin/cron_end_capi_protocol_server.sh backtest_oti_file_mdi_smartwise.ini >> /home/smartwise/backtest_file_cronjob.log
+
+
+ 5 16 * * 1,2,3,4,5  /home/smartwise/usefulscripts/checkLastPrice.sh
+30 16 * * 1,2,3,4,5  killall monitor_log_for_error_smartwise.py
+
+
+10  9 * * 1,2,3,4,5  /home/smartwise/usefulscripts/monitor_ebroker.sh
+15 16 * * 1,2,3,4,5  ps aux | grep monitor_ebroker | grep -v grep | awk '{print $2}' | xargs kill
+
+ *  * * * *          /bin/date >> /home/smartwise/ping_legend.log; /bin/ping -c 4 legendarb.dynamic-dns.net >> /home/smartwise/ping_legend.log
+
+
+#############################
+# Disk space
+#############################
+ 1  2 * * * gzip /home/smartwise/marketdata/ebroker/data/parsed/smartwise_hk_stock/*
+31  2 * * * gzip /home/smartwise/marketdata/ebroker/data/raw/smartwise_hk_stock/*
+ 1  2 * * * gzip /home/smartwise/marketdata/ebroker/data/parsed/smartwise_hk_stock_noleading0/*
+31  2 * * * gzip /home/smartwise/marketdata/ebroker/data/raw/smartwise_hk_stock_noleading0/*
+ 1  3 * * * find /home/smartwise/backtestOTI_fileMDI/data/log/ -type f -exec gzip {} \;
+30  3 * * * find /home/smartwise/orcOTI_fileMDI/data/log/ -type f -exec gzip {} \;
+
+ 1  4 * * * /home/smartwise/usefulscripts/check_disk_space.sh 90 sunny.yan@cashalgo.com,jason.lin@cashalgo.com
+

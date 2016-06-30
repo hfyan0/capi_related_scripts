@@ -1,0 +1,10 @@
+#############################
+# Disk space
+#############################
+ 1  2 * * * gzip /home/smartwise/marketdata/ebroker/data/parsed/smartwise_hk_stock/*
+31  2 * * * gzip /home/smartwise/marketdata/ebroker/data/raw/smartwise_hk_stock/*
+ 1  3 * * * find /home/smartwise/backtestOTI_fileMDI/data/log/ -type f -exec gzip {} \;
+30  3 * * * find /home/smartwise/backtestOTI_fileMDI_20150318/data/log/ -type f -exec gzip {} \;
+ 
+ 1  4 * * * /home/smartwise/usefulscripts/check_disk_space.sh 75 sunny.yan@cash.com.hk,jason.lin@cash.com.hk
+

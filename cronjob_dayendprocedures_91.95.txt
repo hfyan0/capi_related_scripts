@@ -1,0 +1,229 @@
+##########################################################################################################################
+# Version 1
+##########################################################################################################################
+
+ 10 12,16 * * *       qy      sshpass -p RlvZ79GyoW scp -r smartwise@10.11.96.101:/home/smartwise/dailyLastPrice.txt /mnt/w/
+ 12 16 * * *          qy      cat /mnt/w/dailyLastPrice.txt | tr '\t' ',' | tr -d ' ' > /mnt/w/` date +\%Y\%m\%d `"_MD.csv"; /usr/bin/todos /mnt/w/` date +\%Y\%m\%d `"_MD.csv"
+ 15 2,16 * * *        qy      sshpass -p RlvZ79GyoW scp -r smartwise@10.11.96.101:/home/smartwise/backtestOTI_fileMDI/data/log/feedLog/ /mnt/d/smartwise/
+
+ 35 2 * * *           qy      sshpass -p kili123 scp -r kilimanjaro@192.168.91.38:/home/kilimanjaro/workspace/KCHSIHHIPair/production/data/log/                   /mnt/d/hkcouple/38papertradelog/
+ 40 2 * * *           qy      sshpass -p kili123 scp -r kilimanjaro@192.168.91.38:/home/kilimanjaro/workspace/KCHSIHHIPair_production_spoti/production/data/log/  /mnt/d/hkcouple/38productionlog/
+ 36 2 * * *           qy      sshpass -p "4Ghz7NG9ph" scp -r cashadmin@192.168.91.202:/home/cashadmin/papertrade/data/log/                                        /mnt/d/hkcouple/67papertradelog/
+ 41 2 * * *           qy      sshpass -p "4Ghz7NG9ph" scp -r cashadmin@192.168.91.202:/home/cashadmin/production/data/log/                                        /mnt/d/hkcouple/67productionlog/
+
+
+ 23 12,16 * * *       qy      for i in $(find $(find /mnt/d/smartwise/ -type d -name "tradefeed" | sort | uniq) | grep csv.gz); do cat $i | gunzip ; done > /home/qy/smartwise_email.txt; for i in $(find $(find /mnt/d/smartwise/ -type d -name "tradefeed" | sort | uniq) | grep csv$); do cat $i ; done >> /home/qy/smartwise_email.txt; cat /home/qy/smartwise_email.txt | sort | uniq > /home/qy/smartwise_email2.txt; echo -e "Dear Richard\nThere are no trades today. Thanks.\n\nDear Richard\nHere are today's trades. Thanks!" >> /home/qy/smartwise_email2.txt; cat /home/qy/smartwise_email.txt | grep ` date +\%Y\%m\%d ` >> /home/qy/smartwise_email2.txt; mv -f /home/qy/smartwise_email2.txt /home/qy/smartwise_email.txt; sshpass -p 0zxcv00 scp -r /home/qy/smartwise_email.txt qy@128.199.204.90:/home/qy/
+
+
+ 15 3 * * *           qy      find /mnt/d/smartwise/ -type f | sort | uniq | xargs ls -lh > /home/qy/smartwise_email.txt; sshpass -p 0zxcv00 scp -r /home/qy/smartwise_email.txt qy@128.199.204.90:/home/qy/
+ 16 3 * * *           qy      find /mnt/d/hkcouple/67productionlog/ -type f | sort | uniq | xargs ls -lh > /home/qy/kilipdn_email.txt; sshpass -p 0zxcv00 scp -r /home/qy/kilipdn_email.txt qy@128.199.204.90:/home/qy/                                
+
+
+
+
+##########################################################################################################################
+# Version 2
+##########################################################################################################################
+
+ 10 12,16 * * *       qy      sshpass -p RlvZ79GyoW scp -r smartwise@10.11.96.101:/home/smartwise/dailyLastPrice.txt /mnt/w/
+ 12 16 * * *          qy      cat /mnt/w/dailyLastPrice.txt | tr '\t' ',' | tr -d ' ' > /mnt/w/` date +\%Y\%m\%d `"_MD.csv"; /usr/bin/todos /mnt/w/` date +\%Y\%m\%d `"_MD.csv"
+ 15 2,16 * * *        qy      sshpass -p RlvZ79GyoW scp -r smartwise@10.11.96.101:/home/smartwise/backtestOTI_fileMDI/data/log/feedLog/ /mnt/d/smartwise/
+ 15 2,16 * * *        qy      sshpass -p RlvZ79GyoW scp -r smartwise@10.11.96.101:/home/smartwise/orcOTI_fileMDI/data/log/feedLog/ /mnt/d/smartwise_orc/
+
+ 35 2 * * *           qy      sshpass -p kili123 scp -r kilimanjaro@192.168.91.38:/home/kilimanjaro/workspace/KCHSIHHIPair/production/data/log/                   /mnt/d/hkcouple/38papertradelog/
+ 40 2 * * *           qy      sshpass -p kili123 scp -r kilimanjaro@192.168.91.38:/home/kilimanjaro/workspace/KCHSIHHIPair_production_spoti/production/data/log/  /mnt/d/hkcouple/38productionlog/
+ 36 2 * * *           qy      sshpass -p "4Ghz7NG9ph" scp -r cashadmin@192.168.91.202:/home/cashadmin/papertrade/data/log/                                        /mnt/d/hkcouple/67papertradelog/
+ 41 2 * * *           qy      sshpass -p "4Ghz7NG9ph" scp -r cashadmin@192.168.91.202:/home/cashadmin/production/data/log/                                        /mnt/d/hkcouple/67productionlog/
+
+
+ 23 12,16 * * *       qy      for i in $(find $(find /mnt/d/smartwise/ -type d -name "tradefeed" | sort | uniq) | grep csv.gz); do cat $i | gunzip ; done > /home/qy/smartwise_email.txt; for i in $(find $(find /mnt/d/smartwise/ -type d -name "tradefeed" | sort | uniq) | grep csv$); do cat $i ; done >> /home/qy/smartwise_email.txt; cat /home/qy/smartwise_email.txt | sort | uniq > /home/qy/smartwise_email2.txt; echo -e "Dear Richard\nThere are no trades today. Thanks.\n\nDear Richard\nHere are today's trades for Paper Trade." >> /home/qy/smartwise_email2.txt; cat /home/qy/smartwise_email.txt | grep ` date +\%Y\%m\%d ` >> /home/qy/smartwise_email2.txt; mv -f /home/qy/smartwise_email2.txt /home/qy/smartwise_email.txt; sshpass -p 0zxcv00 scp -r /home/qy/smartwise_email.txt qy@128.199.204.90:/home/qy/
+ 23 12,16 * * *       qy      for i in $(find $(find /mnt/d/smartwise_orc/ -type d -name "tradefeed" | sort | uniq) | grep csv.gz); do cat $i | gunzip ; done > /home/qy/smartwise_orc_email.txt; for i in $(find $(find /mnt/d/smartwise_orc/ -type d -name "tradefeed" | sort | uniq) | grep csv$); do cat $i ; done >> /home/qy/smartwise_orc_email.txt; cat /home/qy/smartwise_orc_email.txt | sort | uniq > /home/qy/smartwise_orc_email2.txt; echo -e "Dear Richard\nThere are no trades today. Thanks.\n\nDear Richard\nHere are today's trades for Pilot Test." >> /home/qy/smartwise_orc_email2.txt; cat /home/qy/smartwise_orc_email.txt | grep ` date +\%Y\%m\%d ` >> /home/qy/smartwise_orc_email2.txt; mv -f /home/qy/smartwise_orc_email2.txt /home/qy/smartwise_orc_email.txt; sshpass -p 0zxcv00 scp -r /home/qy/smartwise_orc_email.txt qy@128.199.204.90:/home/qy/
+
+ 15 3 * * *           qy      find /mnt/d/smartwise/ -type f | sort | uniq | xargs ls -lh > /home/qy/smartwise_email.txt; sshpass -p 0zxcv00 scp -r /home/qy/smartwise_email.txt qy@128.199.204.90:/home/qy/
+ 15 3 * * *           qy      find /mnt/d/smartwise_orc/ -type f | sort | uniq | xargs ls -lh > /home/qy/smartwise_orc_email.txt; sshpass -p 0zxcv00 scp -r /home/qy/smartwise_orc_email.txt qy@128.199.204.90:/home/qy/
+ 16 3 * * *           qy      find /mnt/d/hkcouple/67productionlog/ -type f | sort | uniq | xargs ls -lh > /home/qy/kilipdn_email.txt; sshpass -p 0zxcv00 scp -r /home/qy/kilipdn_email.txt qy@128.199.204.90:/home/qy/
+
+
+ 23 18,19,20,21,22 * * *       qy     /home/qy/Dropbox/utilities/downloadconvertHKExSettlePrice.py > /mnt/w/stockoptionprices.csv; cat /mnt/w/` date +\%Y\%m\%d `_MD.csv > /mnt/w/smartwise_marketdata/` date +\%Y\%m\%d `_MD.csv; cat /mnt/w/stockoptionprices.csv >> /mnt/w/smartwise_marketdata/` date +\%Y\%m\%d `_MD.csv; todos /mnt/w/smartwise_marketdata/` date +\%Y\%m\%d `_MD.csv
+
+
+
+##########################################################################################################################
+# Version 3
+##########################################################################################################################
+
+ 10 12,16 * * *       qy      sshpass -p RlvZ79GyoW scp -r smartwise@10.11.96.101:/home/smartwise/dailyLastPrice.txt /mnt/w/cron_smw_processing/
+ 12 16 * * *          qy      cat /mnt/w/cron_smw_processing/dailyLastPrice.txt | tr '\t' ',' | tr -d ' ' > /mnt/w/cron_smw_processing/` date +\%Y\%m\%d `"_MD.csv"; /usr/bin/todos /mnt/w/cron_smw_processing/` date +\%Y\%m\%d `"_MD.csv"
+ 15 2,16 * * *        qy      sshpass -p RlvZ79GyoW scp -r smartwise@10.11.96.101:/home/smartwise/backtestOTI_fileMDI/data/log/feedLog/ /mnt/d/smartwise/
+ 15 2,16 * * *        qy      sshpass -p RlvZ79GyoW scp -r smartwise@10.11.96.101:/home/smartwise/orcOTI_fileMDI/data/log/feedLog/ /mnt/d/smartwise_orc/
+
+ 35 2 * * *           qy      sshpass -p kili123 scp -r kilimanjaro@192.168.91.38:/home/kilimanjaro/workspace/KCHSIHHIPair/production/data/log/                   /mnt/d/hkcouple/38papertradelog/
+ 40 2 * * *           qy      sshpass -p kili123 scp -r kilimanjaro@192.168.91.38:/home/kilimanjaro/workspace/KCHSIHHIPair_production_spoti/production/data/log/  /mnt/d/hkcouple/38productionlog/
+ 36 2 * * *           qy      sshpass -p "4Ghz7NG9ph" scp -r cashadmin@192.168.91.202:/home/cashadmin/papertrade/data/log/                                        /mnt/d/hkcouple/67papertradelog/
+ 41 2 * * *           qy      sshpass -p "4Ghz7NG9ph" scp -r cashadmin@192.168.91.202:/home/cashadmin/production/data/log/                                        /mnt/d/hkcouple/67productionlog/
+
+
+ 23 12,16 * * *       qy      for i in $(find $(find /mnt/d/smartwise/ -type d -name "tradefeed" | sort | uniq) | grep csv.gz); do cat $i | gunzip ; done > /home/qy/smartwise_email.txt; for i in $(find $(find /mnt/d/smartwise/ -type d -name "tradefeed" | sort | uniq) | grep csv$); do cat $i ; done >> /home/qy/smartwise_email.txt; cat /home/qy/smartwise_email.txt | sort | uniq > /home/qy/smartwise_email2.txt; echo -e "Dear Richard\nThere are no trades today. Thanks.\n\nDear Richard\nHere are today's trades for Paper Trade." >> /home/qy/smartwise_email2.txt; cat /home/qy/smartwise_email.txt | grep ` date +\%Y\%m\%d ` >> /home/qy/smartwise_email2.txt; mv -f /home/qy/smartwise_email2.txt /home/qy/smartwise_email.txt; sshpass -p 0zxcv00 scp -r /home/qy/smartwise_email.txt qy@128.199.204.90:/home/qy/
+ 23 12,16 * * *       qy      for i in $(find $(find /mnt/d/smartwise_orc/ -type d -name "tradefeed" | sort | uniq) | grep csv.gz); do cat $i | gunzip ; done > /home/qy/smartwise_orc_email.txt; for i in $(find $(find /mnt/d/smartwise_orc/ -type d -name "tradefeed" | sort | uniq) | grep csv$); do cat $i ; done >> /home/qy/smartwise_orc_email.txt; cat /home/qy/smartwise_orc_email.txt | sort | uniq > /home/qy/smartwise_orc_email2.txt; echo -e "Dear Richard\nThere are no trades today. Thanks.\n\nDear Richard\nHere are today's trades for Pilot Test." >> /home/qy/smartwise_orc_email2.txt; cat /home/qy/smartwise_orc_email.txt | grep ` date +\%Y\%m\%d ` >> /home/qy/smartwise_orc_email2.txt; mv -f /home/qy/smartwise_orc_email2.txt /home/qy/smartwise_orc_email.txt; sshpass -p 0zxcv00 scp -r /home/qy/smartwise_orc_email.txt qy@128.199.204.90:/home/qy/
+
+ 15 3 * * *           qy      find /mnt/d/smartwise/ -type f | sort | uniq | xargs ls -lh > /home/qy/smartwise_email.txt; sshpass -p 0zxcv00 scp -r /home/qy/smartwise_email.txt qy@128.199.204.90:/home/qy/
+ 15 3 * * *           qy      find /mnt/d/smartwise_orc/ -type f | sort | uniq | xargs ls -lh > /home/qy/smartwise_orc_email.txt; sshpass -p 0zxcv00 scp -r /home/qy/smartwise_orc_email.txt qy@128.199.204.90:/home/qy/
+ 16 3 * * *           qy      find /mnt/d/hkcouple/67productionlog/ -type f | sort | uniq | xargs ls -lh > /home/qy/kilipdn_email.txt; sshpass -p 0zxcv00 scp -r /home/qy/kilipdn_email.txt qy@128.199.204.90:/home/qy/
+
+
+ 1,10,20,30,40,50 18,19,20,21,22 * * *       qy     /mnt/w/cron_scripts/downloadconvertHKExSettlePrice.py > /mnt/w/cron_smw_processing/stockoptionprices.csv; cat /mnt/w/cron_smw_processing/stockoptionprices.csv > /mnt/w/cron_smw_processing/stockoptionprices_` date +\%Y\%m\%d `.csv; cat /mnt/w/cron_smw_processing/` date +\%Y\%m\%d `_MD.csv > /mnt/w/cron_smw_marketdata/` date +\%Y\%m\%d `_MD.csv; cat /mnt/w/cron_smw_processing/stockoptionprices_` date +\%Y\%m\%d `.csv >> /mnt/w/cron_smw_marketdata/` date +\%Y\%m\%d `_MD.csv; todos /mnt/w/cron_smw_marketdata/` date +\%Y\%m\%d `_MD.csv
+
+
+
+
+
+
+##########################################################################################################################
+# Version 4
+##########################################################################################################################
+
+ 10 12,16 * * *       qy      sshpass -p RlvZ79GyoW scp -r smartwise@10.11.96.101:/home/smartwise/dailyLastPrice.txt /mnt/w/cron_smw_processing/
+ 12 16 * * *          qy      cat /mnt/w/cron_smw_processing/dailyLastPrice.txt | tr '\t' ',' | tr -d ' ' > /mnt/w/cron_smw_processing/` date +\%Y\%m\%d `"_MD.csv"; /usr/bin/todos /mnt/w/cron_smw_processing/` date +\%Y\%m\%d `"_MD.csv"
+ 15 2,16 * * *        qy      sshpass -p RlvZ79GyoW scp -r smartwise@10.11.96.101:/home/smartwise/backtestOTI_fileMDI/data/log/feedLog/ /mnt/d/smartwise/
+ 15 2,16 * * *        qy      sshpass -p RlvZ79GyoW scp -r smartwise@10.11.96.101:/home/smartwise/orcOTI_fileMDI/data/log/feedLog/ /mnt/d/smartwise_orc/
+
+ 35 2 * * *           qy      sshpass -p kili123 scp -r kilimanjaro@192.168.91.38:/home/kilimanjaro/workspace/KCHSIHHIPair/production/data/log/                   /mnt/d/hkcouple/38papertradelog/
+ 40 2 * * *           qy      sshpass -p kili123 scp -r kilimanjaro@192.168.91.38:/home/kilimanjaro/workspace/KCHSIHHIPair_production_spoti/production/data/log/  /mnt/d/hkcouple/38productionlog/
+ 36 2 * * *           qy      sshpass -p "4Ghz7NG9ph" scp -r cashadmin@192.168.91.202:/home/cashadmin/papertrade/data/log/                                        /mnt/d/hkcouple/67papertradelog/
+ 41 2 * * *           qy      sshpass -p "4Ghz7NG9ph" scp -r cashadmin@192.168.91.202:/home/cashadmin/production/data/log/                                        /mnt/d/hkcouple/67productionlog/
+
+
+ 23 12,16 * * *       qy      for i in $(find $(find /mnt/d/smartwise/ -type d -name "tradefeed" | sort | uniq) | grep csv.gz); do cat $i | gunzip ; done > /home/qy/smartwise_email.txt; for i in $(find $(find /mnt/d/smartwise/ -type d -name "tradefeed" | sort | uniq) | grep csv$); do cat $i ; done >> /home/qy/smartwise_email.txt; cat /home/qy/smartwise_email.txt | sort | uniq > /home/qy/smartwise_email2.txt; echo -e "Dear Richard\nThere are no trades today. Thanks.\n\nDear Richard\nHere are today's trades for Paper Trade." >> /home/qy/smartwise_email2.txt; cat /home/qy/smartwise_email.txt | grep ` date +\%Y\%m\%d ` >> /home/qy/smartwise_email2.txt; mv -f /home/qy/smartwise_email2.txt /home/qy/smartwise_email.txt; sshpass -p 0zxcv00 scp -r /home/qy/smartwise_email.txt qy@128.199.204.90:/home/qy/
+ 23 12,16 * * *       qy      for i in $(find $(find /mnt/d/smartwise_orc/ -type d -name "tradefeed" | sort | uniq) | grep csv.gz); do cat $i | gunzip ; done > /home/qy/smartwise_orc_email.txt; for i in $(find $(find /mnt/d/smartwise_orc/ -type d -name "tradefeed" | sort | uniq) | grep csv$); do cat $i ; done >> /home/qy/smartwise_orc_email.txt; cat /home/qy/smartwise_orc_email.txt | sort | uniq > /home/qy/smartwise_orc_email2.txt; echo -e "Dear Richard\nThere are no trades today. Thanks.\n\nDear Richard\nHere are today's trades for Pilot Test." >> /home/qy/smartwise_orc_email2.txt; cat /home/qy/smartwise_orc_email.txt | grep ` date +\%Y\%m\%d ` >> /home/qy/smartwise_orc_email2.txt; mv -f /home/qy/smartwise_orc_email2.txt /home/qy/smartwise_orc_email.txt; sshpass -p 0zxcv00 scp -r /home/qy/smartwise_orc_email.txt qy@128.199.204.90:/home/qy/
+
+ 15 3 * * *           qy      find /mnt/d/smartwise/ -type f | sort | uniq | xargs ls -lh > /home/qy/smartwise_email.txt; sshpass -p 0zxcv00 scp -r /home/qy/smartwise_email.txt qy@128.199.204.90:/home/qy/
+ 15 3 * * *           qy      find /mnt/d/smartwise_orc/ -type f | sort | uniq | xargs ls -lh > /home/qy/smartwise_orc_email.txt; sshpass -p 0zxcv00 scp -r /home/qy/smartwise_orc_email.txt qy@128.199.204.90:/home/qy/
+ 16 3 * * *           qy      find /mnt/d/hkcouple/67productionlog/ -type f | sort | uniq | xargs ls -lh > /home/qy/kilipdn_email.txt; sshpass -p 0zxcv00 scp -r /home/qy/kilipdn_email.txt qy@128.199.204.90:/home/qy/
+
+
+ 1,10,20,30,40,50 18,19,20,21,22 * * *       qy     /mnt/w/cron_scripts/downloadconvertHKExSettlePrice.py > /mnt/w/cron_smw_processing/stockoptionprices.csv; cat /mnt/w/cron_smw_processing/stockoptionprices.csv > /mnt/w/cron_smw_processing/stockoptionprices_` date +\%Y\%m\%d `.csv; cat /mnt/w/cron_smw_processing/` date +\%Y\%m\%d `_MD.csv > /mnt/w/cron_smw_marketdata/` date +\%Y\%m\%d `_MD.csv; cat /mnt/w/cron_smw_processing/stockoptionprices_` date +\%Y\%m\%d `.csv >> /mnt/w/cron_smw_marketdata/` date +\%Y\%m\%d `_MD.csv; todos /mnt/w/cron_smw_marketdata/` date +\%Y\%m\%d `_MD.csv; /mnt/w/cron_scripts/delNonTradingDayMDFr133.sh
+
+
+##########################################################################################################################
+# Version 5
+##########################################################################################################################
+
+ 1,10,20,30,40,50 18,19,20,21,22 * * *       qy     /mnt/w/cron_scripts/extractSymbolsFrTF.sh; /mnt/w/cron_scripts/downloadconvertHKExSettlePrice.py > /mnt/w/cron_smw_processing/stockoptionprices.csv; cat /mnt/w/cron_smw_processing/stockoptionprices.csv > /mnt/w/cron_smw_processing/stockoptionprices_` date +\%Y\%m\%d `.csv; cat /mnt/w/cron_smw_processing/` date +\%Y\%m\%d `_MD.csv > /mnt/w/cron_smw_marketdata/` date +\%Y\%m\%d `_MD.csv; /mnt/w/cron_scripts/copyRequiredStkOptnToMDFile.sh; todos /mnt/w/cron_smw_marketdata/` date +\%Y\%m\%d `_MD.csv; /mnt/w/cron_scripts/delNonTradingDayMDFr133.sh
+
+
+##########################################################################################################################
+# Version 6
+##########################################################################################################################
+
+ 10 12,16 * * *       qy      sshpass -p RlvZ79GyoW scp -r smartwise@10.11.96.101:/home/smartwise/dailyLastPrice.txt /mnt/w/cron_smw_processing/
+ 12 16 * * *          qy      cat /mnt/w/cron_smw_processing/dailyLastPrice.txt | tr '\t' ',' | tr -d ' ' > /mnt/w/cron_smw_processing/` date +\%Y\%m\%d `"_MD.csv"; /usr/bin/todos /mnt/w/cron_smw_processing/` date +\%Y\%m\%d `"_MD.csv"
+ 15 2,16 * * *        qy      sshpass -p RlvZ79GyoW scp -r smartwise@10.11.96.101:/home/smartwise/backtestOTI_fileMDI/data/log/feedLog/ /mnt/d/smartwise/
+ 15 2,16 * * *        qy      sshpass -p RlvZ79GyoW scp -r smartwise@10.11.96.101:/home/smartwise/orcOTI_fileMDI/data/log/feedLog/ /mnt/d/smartwise_orc/
+
+ 35 2 * * *           qy      sshpass -p kili123 scp -r kilimanjaro@192.168.91.38:/home/kilimanjaro/workspace/KCHSIHHIPair/production/data/log/                   /mnt/d/hkcouple/38papertradelog/
+ 40 2 * * *           qy      sshpass -p kili123 scp -r kilimanjaro@192.168.91.38:/home/kilimanjaro/workspace/KCHSIHHIPair_production_spoti/production/data/log/  /mnt/d/hkcouple/38productionlog/
+ 36 2 * * *           qy      sshpass -p "k3EDD6p6C8" scp -r cashadmin@192.168.91.202:/home/cashadmin/papertrade/data/log/                                        /mnt/d/hkcouple/67papertradelog/
+ 41 2 * * *           qy      sshpass -p "k3EDD6p6C8" scp -r cashadmin@192.168.91.202:/home/cashadmin/production/data/log/                                        /mnt/d/hkcouple/67productionlog/
+
+
+ 23 12,16 * * *       qy      for i in $(find $(find /mnt/d/smartwise/ -type d -name "tradefeed" | sort | uniq) | grep csv.gz); do cat $i | gunzip ; done > /home/qy/smartwise_email.txt; for i in $(find $(find /mnt/d/smartwise/ -type d -name "tradefeed" | sort | uniq) | grep csv$); do cat $i ; done >> /home/qy/smartwise_email.txt; cat /home/qy/smartwise_email.txt | sort | uniq > /home/qy/smartwise_email2.txt; echo -e "Dear Richard\nThere are no trades today. Thanks.\n\nDear Richard\nHere are today's trades for Paper Trade." >> /home/qy/smartwise_email2.txt; cat /home/qy/smartwise_email.txt | grep ` date +\%Y\%m\%d ` >> /home/qy/smartwise_email2.txt; mv -f /home/qy/smartwise_email2.txt /home/qy/smartwise_email.txt; sshpass -p 0zxcv00 scp -r /home/qy/smartwise_email.txt qy@128.199.204.90:/home/qy/
+ 23 12,16 * * *       qy      for i in $(find $(find /mnt/d/smartwise_orc/ -type d -name "tradefeed" | sort | uniq) | grep csv.gz); do cat $i | gunzip ; done > /home/qy/smartwise_orc_email.txt; for i in $(find $(find /mnt/d/smartwise_orc/ -type d -name "tradefeed" | sort | uniq) | grep csv$); do cat $i ; done >> /home/qy/smartwise_orc_email.txt; cat /home/qy/smartwise_orc_email.txt | sort | uniq > /home/qy/smartwise_orc_email2.txt; echo -e "Dear Richard\nThere are no trades today. Thanks.\n\nDear Richard\nHere are today's trades for Pilot Test." >> /home/qy/smartwise_orc_email2.txt; cat /home/qy/smartwise_orc_email.txt | grep ` date +\%Y\%m\%d ` >> /home/qy/smartwise_orc_email2.txt; mv -f /home/qy/smartwise_orc_email2.txt /home/qy/smartwise_orc_email.txt; sshpass -p 0zxcv00 scp -r /home/qy/smartwise_orc_email.txt qy@128.199.204.90:/home/qy/
+
+ 15 3 * * *           qy      find /mnt/d/smartwise/ -type f | sort | uniq | xargs ls -lh > /home/qy/smartwise_email.txt; sshpass -p 0zxcv00 scp -r /home/qy/smartwise_email.txt qy@128.199.204.90:/home/qy/
+ 15 3 * * *           qy      find /mnt/d/smartwise_orc/ -type f | sort | uniq | xargs ls -lh > /home/qy/smartwise_orc_email.txt; sshpass -p 0zxcv00 scp -r /home/qy/smartwise_orc_email.txt qy@128.199.204.90:/home/qy/
+ 16 3 * * *           qy      find /mnt/d/hkcouple/67productionlog/ -type f | sort | uniq | xargs ls -lh > /home/qy/kilipdn_email.txt; sshpass -p 0zxcv00 scp -r /home/qy/kilipdn_email.txt qy@128.199.204.90:/home/qy/
+
+
+ 1,10,20,30,40,50 18,19,20,21,22 * * *       qy     /mnt/w/cron_scripts/extractSymbolsFrTF.sh; /mnt/w/cron_scripts/downloadconvertHKExSettlePrice.py > /mnt/w/cron_smw_processing/stockoptionprices.csv; cat /mnt/w/cron_smw_processing/stockoptionprices.csv > /mnt/w/cron_smw_processing/stockoptionprices_` date +\%Y\%m\%d `.csv; cat /mnt/w/cron_smw_processing/` date +\%Y\%m\%d `_MD.csv > /mnt/w/cron_smw_marketdata/` date +\%Y\%m\%d `_MD.csv; /mnt/w/cron_scripts/copyRequiredStkOptnToMDFile.sh; todos /mnt/w/cron_smw_marketdata/` date +\%Y\%m\%d `_MD.csv; /mnt/w/cron_scripts/delNonTradingDayMDFr133.sh
+
+
+
+
+##########################################################################################################################
+# Version 7
+##########################################################################################################################
+
+ 10 12,16 * * *       qy      sshpass -p RlvZ79GyoW scp -r smartwise@223.197.80.41:/home/smartwise/dailyLastPrice.txt /mnt/w/cron_smw_processing/
+ 12 16 * * *          qy      cat /mnt/w/cron_smw_processing/dailyLastPrice.txt | tr '\t' ',' | tr -d ' ' > /mnt/w/cron_smw_processing/` date +\%Y\%m\%d `"_MD.csv"; /usr/bin/todos /mnt/w/cron_smw_processing/` date +\%Y\%m\%d `"_MD.csv"
+ 15 2,16 * * *        qy      sshpass -p RlvZ79GyoW scp -r smartwise@223.197.80.41:/home/smartwise/backtestOTI_fileMDI/data/log/feedLog/ /mnt/d/smartwise/
+ 15 2,16 * * *        qy      sshpass -p RlvZ79GyoW scp -r smartwise@223.197.80.41:/home/smartwise/orcOTI_fileMDI/data/log/feedLog/ /mnt/d/smartwise_orc/
+
+#35 2 * * *           qy      sshpass -p kili123 scp -r kilimanjaro@192.168.91.38:/home/kilimanjaro/workspace/KCHSIHHIPair/production/data/log/                   /mnt/d/hkcouple/38papertradelog/
+#40 2 * * *           qy      sshpass -p kili123 scp -r kilimanjaro@192.168.91.38:/home/kilimanjaro/workspace/KCHSIHHIPair_production_spoti/production/data/log/  /mnt/d/hkcouple/38productionlog/
+#36 2 * * *           qy      sshpass -p "k3EDD6p6C8" scp -r cashadmin@192.168.91.202:/home/cashadmin/papertrade/data/log/                                        /mnt/d/hkcouple/67papertradelog/
+#41 2 * * *           qy      sshpass -p "k3EDD6p6C8" scp -r cashadmin@192.168.91.202:/home/cashadmin/production/data/log/                                        /mnt/d/hkcouple/67productionlog/
+
+
+ 23 12,16 * * *       qy      for i in $(find $(find /mnt/d/smartwise/ -type d -name "tradefeed" | sort | uniq) | grep csv.gz); do cat $i | gunzip ; done > /home/qy/smartwise_email.txt; for i in $(find $(find /mnt/d/smartwise/ -type d -name "tradefeed" | sort | uniq) | grep csv$); do cat $i ; done >> /home/qy/smartwise_email.txt; cat /home/qy/smartwise_email.txt | sort | uniq > /home/qy/smartwise_email2.txt; echo -e "Dear Richard\nThere are no trades today. Thanks.\n\nDear Richard\nHere are today's trades for Paper Trade." >> /home/qy/smartwise_email2.txt; cat /home/qy/smartwise_email.txt | grep ` date +\%Y\%m\%d ` >> /home/qy/smartwise_email2.txt; mv -f /home/qy/smartwise_email2.txt /home/qy/smartwise_email.txt; sshpass -p x3D6u2Dw36 scp -r /home/qy/smartwise_email.txt qy@128.199.204.90:/home/qy/
+ 23 12,16 * * *       qy      for i in $(find $(find /mnt/d/smartwise_orc/ -type d -name "tradefeed" | sort | uniq) | grep csv.gz); do cat $i | gunzip ; done > /home/qy/smartwise_orc_email.txt; for i in $(find $(find /mnt/d/smartwise_orc/ -type d -name "tradefeed" | sort | uniq) | grep csv$); do cat $i ; done >> /home/qy/smartwise_orc_email.txt; cat /home/qy/smartwise_orc_email.txt | sort | uniq > /home/qy/smartwise_orc_email2.txt; echo -e "Dear Richard\nThere are no trades today. Thanks.\n\nDear Richard\nHere are today's trades for Pilot Test." >> /home/qy/smartwise_orc_email2.txt; cat /home/qy/smartwise_orc_email.txt | grep ` date +\%Y\%m\%d ` >> /home/qy/smartwise_orc_email2.txt; mv -f /home/qy/smartwise_orc_email2.txt /home/qy/smartwise_orc_email.txt; sshpass -p x3D6u2Dw36 scp -r /home/qy/smartwise_orc_email.txt qy@128.199.204.90:/home/qy/
+
+ 15 3 * * *           qy      find /mnt/d/smartwise/ -type f | sort | uniq | xargs ls -lh > /home/qy/smartwise_email.txt; sshpass -p x3D6u2Dw36 scp -r /home/qy/smartwise_email.txt qy@128.199.204.90:/home/qy/
+ 15 3 * * *           qy      find /mnt/d/smartwise_orc/ -type f | sort | uniq | xargs ls -lh > /home/qy/smartwise_orc_email.txt; sshpass -p x3D6u2Dw36 scp -r /home/qy/smartwise_orc_email.txt qy@128.199.204.90:/home/qy/
+#16 3 * * *           qy      find /mnt/d/hkcouple/67productionlog/ -type f | sort | uniq | xargs ls -lh > /home/qy/kilipdn_email.txt; sshpass -p x3D6u2Dw36 scp -r /home/qy/kilipdn_email.txt qy@128.199.204.90:/home/qy/
+
+
+ 1,10,20,30,40,50 18,19,20,21,22 * * *       qy     /mnt/w/cron_scripts/extractSymbolsFrTF.sh; /mnt/w/cron_scripts/downloadconvertHKExSettlePrice.py > /mnt/w/cron_smw_processing/stockoptionprices.csv; cat /mnt/w/cron_smw_processing/stockoptionprices.csv > /mnt/w/cron_smw_processing/stockoptionprices_` date +\%Y\%m\%d `.csv; cat /mnt/w/cron_smw_processing/` date +\%Y\%m\%d `_MD.csv > /mnt/w/cron_smw_marketdata/` date +\%Y\%m\%d `_MD.csv; /mnt/w/cron_scripts/copyRequiredStkOptnToMDFile.sh; todos /mnt/w/cron_smw_marketdata/` date +\%Y\%m\%d `_MD.csv; /mnt/w/cron_scripts/delNonTradingDayMDFr133.sh
+
+
+
+##########################################################################################################################
+# Version 8
+##########################################################################################################################
+
+ 10 12,16 * * *       qy      sshpass -p RlvZ79GyoW scp -r smartwise@223.197.80.41:/home/smartwise/dailyLastPrice.txt /mnt/w/cron_smw_processing/ > /dev/null
+ 12 16 * * *          qy      cat /mnt/w/cron_smw_processing/dailyLastPrice.txt | tr '\t' ',' | tr -d ' ' > /mnt/w/cron_smw_processing/` date +\%Y\%m\%d `"_MD.csv"; /usr/bin/todos /mnt/w/cron_smw_processing/` date +\%Y\%m\%d `"_MD.csv" > /dev/null
+ 15 2,16 * * *        qy      sshpass -p RlvZ79GyoW scp -r smartwise@223.197.80.41:/home/smartwise/backtestOTI_fileMDI/data/log/feedLog/ /mnt/d/smartwise/ > /dev/null
+ 15 2,16 * * *        qy      sshpass -p RlvZ79GyoW scp -r smartwise@223.197.80.41:/home/smartwise/orcOTI_fileMDI/data/log/feedLog/ /mnt/d/smartwise_orc/ > /dev/null
+
+#35 2 * * *           qy      sshpass -p kili123 scp -r kilimanjaro@192.168.91.38:/home/kilimanjaro/workspace/KCHSIHHIPair/production/data/log/                   /mnt/d/hkcouple/38papertradelog/
+#40 2 * * *           qy      sshpass -p kili123 scp -r kilimanjaro@192.168.91.38:/home/kilimanjaro/workspace/KCHSIHHIPair_production_spoti/production/data/log/  /mnt/d/hkcouple/38productionlog/
+#36 2 * * *           qy      sshpass -p "k3EDD6p6C8" scp -r cashadmin@192.168.91.202:/home/cashadmin/papertrade/data/log/                                        /mnt/d/hkcouple/67papertradelog/
+#41 2 * * *           qy      sshpass -p "k3EDD6p6C8" scp -r cashadmin@192.168.91.202:/home/cashadmin/production/data/log/                                        /mnt/d/hkcouple/67productionlog/
+
+
+ 23 12,16 * * *       qy      for i in $(find $(find /mnt/d/smartwise/ -type d -name "tradefeed" | sort | uniq) | grep csv.gz); do cat $i | gunzip ; done > /home/qy/smartwise_email.txt; for i in $(find $(find /mnt/d/smartwise/ -type d -name "tradefeed" | sort | uniq) | grep csv$); do cat $i ; done >> /home/qy/smartwise_email.txt; cat /home/qy/smartwise_email.txt | sort | uniq > /home/qy/smartwise_email2.txt; echo -e "Dear Richard\nThere are no trades today. Thanks.\n\nDear Richard\nHere are today's trades for Paper Trade." >> /home/qy/smartwise_email2.txt; cat /home/qy/smartwise_email.txt | grep ` date +\%Y\%m\%d ` >> /home/qy/smartwise_email2.txt; mv -f /home/qy/smartwise_email2.txt /home/qy/smartwise_email.txt; sshpass -p x3D6u2Dw36 scp -r /home/qy/smartwise_email.txt qy@128.199.204.90:/home/qy/ > /dev/null
+ 23 12,16 * * *       qy      for i in $(find $(find /mnt/d/smartwise_orc/ -type d -name "tradefeed" | sort | uniq) | grep csv.gz); do cat $i | gunzip ; done > /home/qy/smartwise_orc_email.txt; for i in $(find $(find /mnt/d/smartwise_orc/ -type d -name "tradefeed" | sort | uniq) | grep csv$); do cat $i ; done >> /home/qy/smartwise_orc_email.txt; cat /home/qy/smartwise_orc_email.txt | sort | uniq > /home/qy/smartwise_orc_email2.txt; echo -e "Dear Richard\nThere are no trades today. Thanks.\n\nDear Richard\nHere are today's trades for Pilot Test." >> /home/qy/smartwise_orc_email2.txt; cat /home/qy/smartwise_orc_email.txt | grep ` date +\%Y\%m\%d ` >> /home/qy/smartwise_orc_email2.txt; mv -f /home/qy/smartwise_orc_email2.txt /home/qy/smartwise_orc_email.txt; sshpass -p x3D6u2Dw36 scp -r /home/qy/smartwise_orc_email.txt qy@128.199.204.90:/home/qy/ > /dev/null
+
+ 15 3 * * *           qy      find /mnt/d/smartwise/ -type f | sort | uniq | xargs ls -lh > /home/qy/smartwise_email.txt; sshpass -p x3D6u2Dw36 scp -r /home/qy/smartwise_email.txt qy@128.199.204.90:/home/qy/ > /dev/null
+ 15 3 * * *           qy      find /mnt/d/smartwise_orc/ -type f | sort | uniq | xargs ls -lh > /home/qy/smartwise_orc_email.txt; sshpass -p x3D6u2Dw36 scp -r /home/qy/smartwise_orc_email.txt qy@128.199.204.90:/home/qy/ > /dev/null
+#16 3 * * *           qy      find /mnt/d/hkcouple/67productionlog/ -type f | sort | uniq | xargs ls -lh > /home/qy/kilipdn_email.txt; sshpass -p x3D6u2Dw36 scp -r /home/qy/kilipdn_email.txt qy@128.199.204.90:/home/qy/ > /dev/null
+
+
+ 16,48 16,17,18 * * *       qy     /mnt/w/cron_scripts/extractSymbolsFrTF.sh; /mnt/w/cron_scripts/downloadconvertHKExSettlePrice.py > /mnt/w/cron_smw_processing/stockoptionprices.csv; cat /mnt/w/cron_smw_processing/stockoptionprices.csv > /mnt/w/cron_smw_processing/stockoptionprices_` date +\%Y\%m\%d `.csv; cat /mnt/w/cron_smw_processing/` date +\%Y\%m\%d `_MD.csv > /mnt/w/cron_smw_marketdata/` date +\%Y\%m\%d `_MD.csv; /mnt/w/cron_scripts/copyRequiredStkOptnToMDFile.sh; todos /mnt/w/cron_smw_marketdata/` date +\%Y\%m\%d `_MD.csv; /mnt/w/cron_scripts/delNonTradingDayMDFr133.sh > /dev/null
+
+
+
+
+
+##########################################################################################################################
+# Version 9
+##########################################################################################################################
+
+ 10 12,16 * * *       qy      sshpass -p RlvZ79GyoW scp -r smartwise@223.197.80.41:/home/smartwise/dailyLastPrice.txt /mnt/w/cron_smw_processing/ > /dev/null
+ 12 16 * * *          qy      cat /mnt/w/cron_smw_processing/dailyLastPrice.txt | tr '\t' ',' | tr -d ' ' > /mnt/w/cron_smw_processing/` date +\%Y\%m\%d `"_MD.csv"; /usr/bin/todos /mnt/w/cron_smw_processing/` date +\%Y\%m\%d `"_MD.csv"; cp /mnt/w/cron_smw_processing/` date +\%Y\%m\%d `"_MD.csv"  /mnt/w/cron_smw_marketdata/` date +\%Y\%m\%d `"_MD.csv" > /dev/null
+ 15 2,16 * * *        qy      sshpass -p RlvZ79GyoW scp -r smartwise@223.197.80.41:/home/smartwise/backtestOTI_fileMDI/data/log/feedLog/ /mnt/d/smartwise/ > /dev/null
+ 15 2,16 * * *        qy      sshpass -p RlvZ79GyoW scp -r smartwise@223.197.80.41:/home/smartwise/orcOTI_fileMDI/data/log/feedLog/ /mnt/d/smartwise_orc/ > /dev/null
+
+#35 2 * * *           qy      sshpass -p kili123 scp -r kilimanjaro@192.168.91.38:/home/kilimanjaro/workspace/KCHSIHHIPair/production/data/log/                   /mnt/d/hkcouple/38papertradelog/
+#40 2 * * *           qy      sshpass -p kili123 scp -r kilimanjaro@192.168.91.38:/home/kilimanjaro/workspace/KCHSIHHIPair_production_spoti/production/data/log/  /mnt/d/hkcouple/38productionlog/
+#36 2 * * *           qy      sshpass -p "k3EDD6p6C8" scp -r cashadmin@192.168.91.202:/home/cashadmin/papertrade/data/log/                                        /mnt/d/hkcouple/67papertradelog/
+#41 2 * * *           qy      sshpass -p "k3EDD6p6C8" scp -r cashadmin@192.168.91.202:/home/cashadmin/production/data/log/                                        /mnt/d/hkcouple/67productionlog/
+
+
+ 23 12,16 * * *       qy      for i in $(find $(find /mnt/d/smartwise/ -type d -name "tradefeed" | sort | uniq) | grep csv.gz); do cat $i | gunzip ; done > /home/qy/smartwise_email.txt; for i in $(find $(find /mnt/d/smartwise/ -type d -name "tradefeed" | sort | uniq) | grep csv$); do cat $i ; done >> /home/qy/smartwise_email.txt; cat /home/qy/smartwise_email.txt | sort | uniq > /home/qy/smartwise_email2.txt; echo -e "Dear Richard\nThere are no trades today. Thanks.\n\nDear Richard\nHere are today's trades for Paper Trade." >> /home/qy/smartwise_email2.txt; cat /home/qy/smartwise_email.txt | grep ` date +\%Y\%m\%d ` >> /home/qy/smartwise_email2.txt; mv -f /home/qy/smartwise_email2.txt /home/qy/smartwise_email.txt; sshpass -p x3D6u2Dw36 scp -r /home/qy/smartwise_email.txt qy@128.199.204.90:/home/qy/ > /dev/null
+ 23 12,16 * * *       qy      for i in $(find $(find /mnt/d/smartwise_orc/ -type d -name "tradefeed" | sort | uniq) | grep csv.gz); do cat $i | gunzip ; done > /home/qy/smartwise_orc_email.txt; for i in $(find $(find /mnt/d/smartwise_orc/ -type d -name "tradefeed" | sort | uniq) | grep csv$); do cat $i ; done >> /home/qy/smartwise_orc_email.txt; cat /home/qy/smartwise_orc_email.txt | sort | uniq > /home/qy/smartwise_orc_email2.txt; echo -e "Dear Richard\nThere are no trades today. Thanks.\n\nDear Richard\nHere are today's trades for Pilot Test." >> /home/qy/smartwise_orc_email2.txt; cat /home/qy/smartwise_orc_email.txt | grep ` date +\%Y\%m\%d ` >> /home/qy/smartwise_orc_email2.txt; mv -f /home/qy/smartwise_orc_email2.txt /home/qy/smartwise_orc_email.txt; sshpass -p x3D6u2Dw36 scp -r /home/qy/smartwise_orc_email.txt qy@128.199.204.90:/home/qy/ > /dev/null
+
+ 15 3 * * *           qy      find /mnt/d/smartwise/ -type f | sort | uniq | xargs ls -lh > /home/qy/smartwise_email.txt; sshpass -p x3D6u2Dw36 scp -r /home/qy/smartwise_email.txt qy@128.199.204.90:/home/qy/ > /dev/null
+ 15 3 * * *           qy      find /mnt/d/smartwise_orc/ -type f | sort | uniq | xargs ls -lh > /home/qy/smartwise_orc_email.txt; sshpass -p x3D6u2Dw36 scp -r /home/qy/smartwise_orc_email.txt qy@128.199.204.90:/home/qy/ > /dev/null
+#16 3 * * *           qy      find /mnt/d/hkcouple/67productionlog/ -type f | sort | uniq | xargs ls -lh > /home/qy/kilipdn_email.txt; sshpass -p x3D6u2Dw36 scp -r /home/qy/kilipdn_email.txt qy@128.199.204.90:/home/qy/ > /dev/null
+
+
+
+
+
+
+##########################################################################################################################
+# Kangaroo
+##########################################################################################################################
+15 7,10,11,15 * * 1           qy      /home/qy/Dropbox/cash/kangaroo/dlKangarooStkSelListFrDbx.sh lastfri
+

@@ -1,0 +1,14 @@
+ 1  8 * * 1,2,3,4,5 /home/sunnyyan/marketdata/ebroker/bin/stop_ebroker_connections.sh
+55  8 * * 1,2,3,4,5 /home/sunnyyan/marketdata/ebroker/bin/cron_start_ebroker_connections.sh
+
+ 1  9 * * 1,2,3,4,5 /home/sunnyyan/capi_protocol_server_rh63_hkRT/bin/cron_start_capi_protocol_server.sh /home/sunnyyan/capi_protocol_server_rh63_hkRT/conf/file_mdi_bkt_oti_jayden_hkRT.ini >> /home/sunnyyan/capi_protocol_server_rh63_hkRT/data/log/log/cronjob.log
+ 1  6 * * 1,2,3,4,5 /home/sunnyyan/capi_protocol_server_rh63_bkt_oti_bkt_mdi_hkhist/bin/cron_start_capi_protocol_server.sh /home/sunnyyan/capi_protocol_server_rh63_bkt_oti_bkt_mdi_hkhist/conf/bkt_mdi_bkt_oti_jayden_hkhist.ini >> /home/sunnyyan/capi_protocol_server_rh63_bkt_oti_bkt_mdi_hkhist/data/log/log/cronjob.log
+ 1  7 * * 1,2,3,4,5 /home/sunnyyan/capi_protocol_server_rh63_bkt_oti_bkt_mdi_cffexhist/bin/cron_start_capi_protocol_server.sh /home/sunnyyan/capi_protocol_server_rh63_bkt_oti_bkt_mdi_cffexhist/conf/bkt_mdi_bkt_oti_jayden_cffexhist.ini >> /home/sunnyyan/capi_protocol_server_rh63_bkt_oti_bkt_mdi_cffexhist/data/log/log/cronjob.log
+
+59 23 * * 1,2,3,4,5 /home/sunnyyan/capi_protocol_server_rh63_hkRT/bin/cron_stop_capi_protocol_server.sh /home/sunnyyan/capi_protocol_server_rh63_hkRT/conf/file_mdi_bkt_oti_jayden_hkRT.ini
+45  5 * * 1,2,3,4,5 /home/sunnyyan/capi_protocol_server_rh63_bkt_oti_bkt_mdi_hkhist/bin/cron_stop_capi_protocol_server.sh /home/sunnyyan/capi_protocol_server_rh63_bkt_oti_bkt_mdi_hkhist/conf/bkt_mdi_bkt_oti_jayden_hkhist.ini
+45  6 * * 1,2,3,4,5 /home/sunnyyan/capi_protocol_server_rh63_bkt_oti_bkt_mdi_cffexhist/bin/cron_stop_capi_protocol_server.sh /home/sunnyyan/capi_protocol_server_rh63_bkt_oti_bkt_mdi_cffexhist/conf/bkt_mdi_bkt_oti_jayden_cffexhist.ini
+
+#45  3 * * * rm -f /home/sunnyyan/marketdata/ebroker/data/raw/hsi_mhi_hhi_mch_future/*log
+#15  4 * * * rm -f /home/sunnyyan/marketdata/ebroker/data/parsed/hsi_mhi_hhi_mch_future/*log
+

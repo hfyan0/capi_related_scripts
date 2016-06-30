@@ -1,0 +1,15 @@
+ 1  8 * * 1,2,3,4,5 /home/atu/ebroker/bin/stop_ebroker_connections.sh
+55  8 * * 1,2,3,4,5 /home/atu/ebroker/bin/cron_start_ebroker_connections.sh
+
+ 0  9 * * 1,2,3,4,5 /appdata/algo_trade/ceil_cffex_capi_protocol_server_pilot_trade/bin/cron_start_capi_protocol_server.sh >> /appdata/algo_trade/ceil_cffex_capi_protocol_server_pilot_trade/log/ceil_cffex_cronjob.log
+ 1  9 * * 1,2,3,4,5 /appdata/algo_trade/ceil_cffex_capi_protocol_server_pilot_trade/bin/monitor_oti_closeall_on_ping_timeout.py localhost 10021 >> /appdata/algo_trade/ceil_cffex_capi_protocol_server_pilot_trade/log/monitor_oti_closeall_on_ping_timeout` date +\%Y\%m\%d `.l
+og
+
+30 15 * * 1,2,3,4,5 killall monitor_oti_closeall_on_ping_timeout.py
+
+30 16 * * 1,2,3,4,5 /appdata/algo_trade/ceil_cffex_capi_protocol_server_pilot_trade/bin/cron_stop_capi_protocol_server.sh
+59 23 * * 1,2,3,4,5 /appdata/algo_trade/ceil_cffex_capi_protocol_server_pilot_trade/bin/cron_stop_capi_protocol_server.sh
+
+
+####10 09 * * 1,2,3,4,5 /appdata/algo_trade/ceil_cffex_capi_protocol_server_pilot_trade/bin/cron_mdi_subscription.sh /appdata/algo_trade/ceil_cffex_capi_protocol_server_pilot_trade/conf/mdi_subscription_list.txt 10020
+####10 09 * * 1,2,3,4,5 /appdata/algo_trade/ceil_hkfe_capi_protocol_server_backtest_pilot_trade/bin/cron_mdi_subscription.sh /appdata/ebroker/conf/ceil_hkif_feedcodes_list.txt 10020
